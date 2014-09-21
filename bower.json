@@ -1,0 +1,26 @@
+{
+  "name": "image_bank",
+  "version": "0.0.0",
+  "dependencies": {
+    "bootstrap": "~3.2.0",
+    "requirejs": "~2.1.15",
+    "jquery": "~2.1.1",
+    "backbone": "~1.1.2",
+    "requirejs-text": "~2.0.12",
+    "jquery-cookie": "~1.4.1"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components",
+    "bower_components",
+    "test",
+    "tests",
+    "static/js/libs"
+  ],
+  "homepage": "https://github.com/kgantsov/image_bank",
+  "authors": [
+    "Konstantin Gantsov <k.gantsov@gmail.com>"
+  ],
+  "license": "GPL 2"
+}

@@ -1,0 +1,49 @@
+body {
+  padding-top: 70px;
+  padding-bottom: 30px;
+}
+
+.theme-dropdown .dropdown-menu {
+  position: static;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.theme-showcase > p > .btn {
+  margin: 5px 0;
+}
+
+.theme-showcase .navbar .container {
+  width: auto;
+}
+
+p.bg-primary {
+    padding: 15px;
+}
+
+p.bg-success {
+    padding: 15px;
+}
+
+p.bg-info {
+    padding: 15px;
+}
+
+p.bg-warning {
+    padding: 15px;
+}
+
+p.bg-danger {
+    padding: 15px;
+}
+
+form.search_form {
+    margin: 10px 0;
+}
+
+
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

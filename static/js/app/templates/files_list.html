@@ -1,0 +1,58 @@
+<form class="search_form form-inline" role="form">
+    <div class="form-group">
+        <label class="sr-only" for="term">Email address</label>
+        <input type="text" class="form-control" id="term" value="<%= search_term %>" placeholder="Search term">
+    </div>
+    <button id="search" type="button" class="btn btn-default">Search</button>
+</form>
+
+<% if (files.length > 0) { %>
+    <table class="table table-bordered">
+        <tr>
+            <th>Name</th>
+            <th>Path</th>
+            <th>Mime type</th>
+            <th></th>
+        </tr>
+        <% _.each(files, function(file) { %>
+            <tr>
+                <td><a href="#/view/<%= file.get('id') %>"><%= file.get('name') %></a></td>
+                <td><%= file.get('path') %></td>
+                <td><%= file.get('mime_type') %></td>
+                <td>
+                    <a href="" class="remove_file" data-id="<%= file.get('id') %>">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </a>
+                </td>
+            </tr>
+        <% }); %>
+    </table>
+
+    <% if (pager.totalPages > 1) { %>
+        <% if (search_term) { %>
+            <% term = encodeURIComponent(search_term) %>
+        <% } else { %>
+            <% term = '' %>
+        <% } %>
+        <ul class="pagination">
+            <% if (pager.hasPreviousPage) { %>
+                <li><a href="#/index/<%= pager.previousPage %>/<%= term %>">&laquo;</a></li>
+            <% } %>
+
+            <% for (var i = 1; i <= pager.lastPage; i++) { %>
+                <% if (pager.currentPage == i) { %>
+                    <li class="active"><span><%= i %></span></li>
+                <% } else { %>
+                    <li><a href="#/index/<%= i %>/<%= term %>" ><%= i %></a></li>
+                <% } %>
+
+            <% } %>
+
+            <% if (pager.hasNextPage) { %>
+                <li><a href="#/index/<%= pager.nextPage %>/<%= term %>">&raquo;</a></li>
+            <% } %>
+        </ul>
+    <% } %>
+<% } else { %>
+    No files in directory
+<% } %>

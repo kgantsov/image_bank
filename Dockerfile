@@ -4,8 +4,10 @@ RUN apt-get -y update
 RUN apt-get -y upgrade
 
 # Install Python Setuptools
-RUN apt-get install -y python-setuptools python-imaging python-dev libjpeg-dev libpng-dev
-RUN apt-get install -y node nodejs npm
+RUN apt-get install -y python-setuptools python-imaging python-dev libjpeg-dev libpng-dev git
+RUN apt-get install -y curl
+RUN curl -sL https://deb.nodesource.com/setup | sudo bash -
+RUN apt-get install -y nodejs
 RUN npm install -g bower
 
 # Install pip
@@ -18,7 +20,7 @@ ADD . /code
 WORKDIR /code
 
 RUN pip install -r requirements.txt
-# RUN bower install
+RUN bower install --allow-root
 RUN python manage.py migrate
 RUN python manage.py loaddata webapp/fixtures/initial_data.json
 

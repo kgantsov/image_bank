@@ -16,7 +16,7 @@ RUN easy_install pip
 # Expose ports
 EXPOSE 8000
 
-ADD . /code
+RUN git clone https://github.com/kgantsov/image_bank.git /code
 WORKDIR /code
 
 RUN pip install -r requirements.txt

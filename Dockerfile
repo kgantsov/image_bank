@@ -12,7 +12,7 @@ RUN npm install -g bower
 RUN easy_install pip
 
 # Expose ports
-# EXPOSE 8000
+EXPOSE 8000
 
 ADD . /code
 WORKDIR /code
@@ -20,4 +20,4 @@ WORKDIR /code
 RUN pip install -r requirements.txt
 RUN python manage.py migrate
 
-CMD python manage.py runserver
+CMD python manage.py runserver 0.0.0.0:8000

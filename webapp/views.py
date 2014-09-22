@@ -30,7 +30,7 @@ def get_files(request, search_term=None):
     :param search_term: Search term
     :return:
     """
-    def _prepare_data(file_obj):
+    def prepare_data(file_obj):
         return {
             'id': file_obj.id,
             'name': file_obj.name,
@@ -66,7 +66,7 @@ def get_files(request, search_term=None):
 
     files_page = paginator.page(page)
 
-    files = [_prepare_data(x) for x in files_page.object_list]
+    files = [prepare_data(x) for x in files_page.object_list]
 
     next_page = files_page.next_page_number() if files_page.has_next() else None
     prev_page = (
@@ -95,7 +95,7 @@ def get_file(request, file_id):
     :param file_id: ID of file
     :return:
     """
-    def _prepare_meta_data(meta_obj):
+    def prepare_meta_data(meta_obj):
         return {
             'id': meta_obj.id,
             'name': meta_obj.field.name,
@@ -104,7 +104,7 @@ def get_file(request, file_id):
         }
 
     file_obj = get_object_or_404(File, id=file_id)
-    meta_data = [_prepare_meta_data(x) for x in file_obj.meta.all()]
+    meta_data = [prepare_meta_data(x) for x in file_obj.meta.all()]
 
     image = file_obj.image.url if file_obj.is_image() else None
     preview = get_thumbnail(

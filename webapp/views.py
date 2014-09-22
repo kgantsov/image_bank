@@ -106,10 +106,10 @@ def get_file(request, file_id):
     file_obj = get_object_or_404(File, id=file_id)
     meta_data = [_prepare_meta_data(x) for x in file_obj.meta.all()]
 
-    image = file_obj.image
+    image = file_obj.image.url if file_obj.is_image() else None
     preview = get_thumbnail(
         file_obj.image, '640x480', quality=99
-    )
+    ).url if file_obj.is_image() else None
 
     return HttpResponse(
         json.dumps({
@@ -117,8 +117,8 @@ def get_file(request, file_id):
             'name': file_obj.name,
             'path': file_obj.path,
             'mime_type': file_obj.mime_type,
-            'image': image.url,
-            'preview': preview.url,
+            'image': image,
+            'preview': preview,
             'date_modified': str(file_obj.date_modified),
             'date_created': str(file_obj.date_created),
             'meta_data': meta_data

@@ -55,6 +55,7 @@ def get_files(request, search_term=None):
         file_ids = [x.file_id for x in meta_data]
         files = File.objects.filter(
             Q(name__icontains=search_term) |
+            Q(path__icontains=search_term) |
             Q(mime_type__icontains=search_term) |
             Q(id__in=file_ids)
         )

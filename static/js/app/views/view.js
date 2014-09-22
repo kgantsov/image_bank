@@ -29,17 +29,12 @@ define([
 
                     $.get("/get_fields/", function(data) {
                         if (data.status == 'success') {
-                            console.log('DID', data.fields);
                             self.fields = data.fields;
                             self.render();
                         }
                     });
                 },
                 render: function() {
-                    var self = this;
-                    console.log('SSSSSSSSSSS', this.file.get('id'), this.file.get('name'));
-                    console.log('SSSSSSSSSSS', this.file.get('meta_data'));
-
                     $('#meta_data_popup').on('hidden.bs.modal', function () {});
 
                     $(this.el).html(_.template(tpl)({
@@ -57,7 +52,6 @@ define([
                     };
                     $.post("/remove_meta_data/", data, function(data) {
                         if (data.status == 'success') {
-                            console.log('DID');
                             self.file.fetch();
                         }
                     });

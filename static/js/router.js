@@ -10,7 +10,6 @@ define(['backbone'], function(Backbone) {
             "view(/:id)": "view"
         },
         index: function(page, search_term) {
-            console.log('VVVVVVVVVVVVV', page, search_term);
             require(['app/views/index'], function(index) {
                 index.show(page, search_term);
             });

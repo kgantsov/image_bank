@@ -6,7 +6,6 @@ define([
     var FileCollection = Backbone.PageableCollection.extend({
         model: File,
         url: function() {
-            console.log(this);
             if (this.search_term) {
                 return '/get_files/' + this.search_term;
             } else {

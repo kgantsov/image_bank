@@ -5,8 +5,6 @@ define([
 ], function(Backbone, FileCollection, tpl) {
     return {
         show: function(page, search_term) {
-            console.log('INDEX DDDDDDDDDDDDDDDDDDDDDDDD');
-
             var ListView = Backbone.View.extend({
                 el: $('#content'),
                 events: {
@@ -26,7 +24,6 @@ define([
                     this.render();
                 },
                 render: function() {
-                    console.log(this.collection.state, this.collection.models.length);
                     $(this.el).html(_.template(tpl)({
                         files: this.collection.models,
                         pager: this.collection.state,
@@ -34,9 +31,7 @@ define([
                     }));
                 },
                 search: function() {
-//                    this.navigate("/");
                     window.location = '#/index/1/' + encodeURIComponent($('#term').val());
-                    console.log('sssssssssssssssss++++++++++++++', encodeURIComponent($('#term').val()));
                 },
                 removeFile: function (e) {
                     var self = this;

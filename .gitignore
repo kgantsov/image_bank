@@ -58,3 +58,6 @@ target/
 
 # Project data
 media/
+
+# JS librares which were instaled by bower
+static/js/libs/

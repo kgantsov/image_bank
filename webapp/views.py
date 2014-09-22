@@ -39,7 +39,6 @@ def get_files(request, search_term=None):
     files = File.objects.order_by('name')
 
     if search_term:
-        print 'BBBBBBB', search_term
         meta_data = MetaData.objects.filter(value__icontains=search_term).all()
         file_ids = [x.file_id for x in meta_data]
         files = File.objects.filter(
@@ -162,7 +161,6 @@ def remove_file(request):
     else:
         file_obj = get_object_or_404(File, path=path)
 
-    print '******************', file_obj, file_id, path
     file_obj.image.delete()
     file_obj.delete()
 
@@ -178,8 +176,6 @@ def add_file(request):
     path = request.POST.get('path')
     mime_type = request.POST.get('mime_type')
 
-    print '++++++++++++++++++++++++++++++++++++++', name, path, mime_type
-
     file_obj, created = File.objects.get_or_create(
         name=name, path=path, mime_type=mime_type
     )
@@ -187,7 +183,6 @@ def add_file(request):
     if request.FILES:
         fname = request.FILES.values()[0]
         if len(fname.read()) > 0:
-            print '$$$$$$$$$$$$$$$$', name, fname, type(name), type(fname)
             file_obj.image.delete()
             file_obj.image.save(name, fname)
 

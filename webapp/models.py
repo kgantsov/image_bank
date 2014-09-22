@@ -1,6 +1,5 @@
 from django.db import models
 from sorl.thumbnail import ImageField
-from django.utils.translation import gettext as _
 
 
 class File(models.Model):

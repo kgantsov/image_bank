@@ -7,14 +7,14 @@ from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
 
-APP_HOST = '127.0.0.1:8000'
-
 
 class ChangeHandler(FileSystemEventHandler):
     """
     React to changes in Python and Rest files by
     running unit tests (Python) or building docs (.rst)
     """
+
+    host = '127.0.0.1:8000'
 
     def on_created(self, event):
         files = []
@@ -28,7 +28,7 @@ class ChangeHandler(FileSystemEventHandler):
             files = [(name, (name, open(event.src_path, 'rb'), mime_type))]
 
         requests.post(
-            'http://%s/add_file' % APP_HOST,
+            'http://%s/add_file' % self.host,
             data={
                 'name': name,
                 'path': os.path.abspath(event.src_path),
@@ -36,13 +36,19 @@ class ChangeHandler(FileSystemEventHandler):
             },
             files=files
         )
+        print 'File [%s] created, sync to server [%s]' % (
+            event.src_path, handler.host
+        )
 
     def on_deleted(self, event):
         requests.post(
-            'http://%s/remove_file' % APP_HOST,
+            'http://%s/remove_file' % self.host,
             data={
                 'path': os.path.abspath(event.src_path),
             }
+        )
+        print 'File [%s] deleted, sync to server [%s]' % (
+            event.src_path, handler.host
         )
 
     def on_modified(self, event):
@@ -57,13 +63,16 @@ class ChangeHandler(FileSystemEventHandler):
             files = [(name, (name, open(event.src_path, 'rb'), mime_type))]
 
         requests.post(
-            'http://%s/add_file' % APP_HOST,
+            'http://%s/add_file' % self.host,
             data={
                 'name': name,
                 'path': os.path.abspath(event.src_path),
                 'mime_type': mime_type
             },
             files=files
+        )
+        print 'File [%s] modified, sync to server [%s]' % (
+            event.src_path, handler.host
         )
 
 
@@ -74,11 +83,14 @@ if __name__ == "__main__":
     parser.add_argument(
         "-d", "--dir", required=True, help="Directory for watching"
     )
+    parser.add_argument("-s", "--server", help="Host of the server")
 
     args = parser.parse_args()
 
     observer = Observer()
-    observer.schedule(ChangeHandler(), args.dir, recursive=True)
+    handler = ChangeHandler()
+    handler.host = args.server or '127.0.0.1:8000'
+    observer.schedule(handler, args.dir, recursive=True)
     observer.start()
 
     print 'Start watching directory [ %s ]' % os.path.abspath(args.dir)

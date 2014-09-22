@@ -4,7 +4,7 @@ RUN apt-get -y update
 RUN apt-get -y upgrade
 
 # Install Python Setuptools
-RUN apt-get install -y python-setuptools python-imaging python-dev
+RUN apt-get install -y python-setuptools python-imaging python-dev libjpeg-dev libpng-dev
 RUN apt-get install -y node nodejs npm
 RUN npm install -g bower
 
@@ -18,7 +18,7 @@ ADD . /code
 WORKDIR /code
 
 RUN pip install -r requirements.txt
-RUN bower install
+# RUN bower install
 RUN python manage.py migrate
 
 CMD python manage.py runserver 0.0.0.0:8000

@@ -36,7 +36,7 @@ define([
         },
 
         parseRecords: function (resp, options) {
-            return resp.items;
+            return resp.files;
         }
     });
     return FileCollection

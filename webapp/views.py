@@ -14,10 +14,22 @@ from webapp.models import Field
 
 
 def home(request):
+    """
+    Show index page of project
+
+    :param request:
+    :return: Template
+    """
     return render(request, 'webapp/index.html', {})
 
 
 def get_files(request, search_term=None):
+    """
+    Get files with paging
+    :param request:
+    :param search_term: Search term
+    :return:
+    """
     def _prepare_data(file_obj):
         return {
             'id': file_obj.id,
@@ -27,12 +39,12 @@ def get_files(request, search_term=None):
         }
 
     try:
-        page = int(request.GET.get('page', '1'))
+        page = int(request.GET.get('page', 1))
     except ValueError:
         page = 1
 
     try:
-        per_page = int(request.GET.get('per_page', '10'))
+        per_page = int(request.GET.get('per_page', 100))
     except ValueError:
         per_page = 1
 
@@ -64,7 +76,7 @@ def get_files(request, search_term=None):
     return HttpResponse(
         json.dumps({
             'status': 'success',
-            'items': files,
+            'files': files,
             'total_count': paginator.count,
             'last_page': paginator.num_pages,
             'has_next': files_page.has_next(),
@@ -77,6 +89,12 @@ def get_files(request, search_term=None):
 
 
 def get_file(request, file_id):
+    """
+    Get file by id
+    :param request:
+    :param file_id: ID of file
+    :return:
+    """
     def _prepare_meta_data(meta_obj):
         return {
             'id': meta_obj.id,
@@ -110,6 +128,11 @@ def get_file(request, file_id):
 
 
 def add_meta_data(request):
+    """
+    Add meta data to file
+    :param request:
+    :return:
+    """
     file_id = int(request.POST.get('file_id'))
     field_id = int(request.POST.get('field_id'))
     value = request.POST.get('value')
@@ -132,6 +155,11 @@ def add_meta_data(request):
 
 
 def remove_meta_data(request):
+    """
+    Delete meta data from file
+    :param request:
+    :return:
+    """
     meta_data_id = int(request.POST.get('meta_data_id'))
     meta_data = get_object_or_404(MetaData, id=meta_data_id)
     meta_data.delete()
@@ -143,6 +171,11 @@ def remove_meta_data(request):
 
 
 def get_fields(request):
+    """
+    Get all fields
+    :param request:
+    :return:
+    """
     fields = [{'id': x.id, 'name': x.name} for x in Field.objects.all()]
 
     return HttpResponse(
@@ -153,6 +186,11 @@ def get_fields(request):
 
 @csrf_exempt
 def remove_file(request):
+    """
+    Remove file from database by ID or Path of file
+    :param request:
+    :return:
+    """
     file_id = request.POST.get('file_id', None)
     path = request.POST.get('path', None)
 
@@ -172,6 +210,11 @@ def remove_file(request):
 
 @csrf_exempt
 def add_file(request):
+    """
+    Add new file to database
+    :param request:
+    :return:
+    """
     name = request.POST.get('name')
     path = request.POST.get('path')
     mime_type = request.POST.get('mime_type')
@@ -181,10 +224,10 @@ def add_file(request):
     )
 
     if request.FILES:
-        fname = request.FILES.values()[0]
-        if len(fname.read()) > 0:
+        file_name = request.FILES.values()[0]
+        if len(file_name.read()) > 0:
             file_obj.image.delete()
-            file_obj.image.save(name, fname)
+            file_obj.image.save(name, file_name)
 
     file_obj.save()
 

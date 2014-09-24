@@ -31,6 +31,11 @@ urlpatterns = patterns(
         name='remove_file'
     ),
     url(
+        r'^move_file/?$',
+        'webapp.views.move_file',
+        name='move_file'
+    ),
+    url(
         r'^get_fields/?$',
         'webapp.views.get_fields',
         name='get_fields'

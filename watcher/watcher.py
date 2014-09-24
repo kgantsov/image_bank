@@ -34,12 +34,32 @@ class ChangeHandler(FileSystemEventHandler):
         )
 
     def on_deleted(self, event):
+        if event.is_directory:
+            return
+
         requests.post(
             'http://%s/remove_file' % self.host,
             data={'path': event.src_path}
         )
         print 'File [%s] deleted, sync to server [%s]' % (
             event.src_path, handler.host
+        )
+
+    def on_moved(self, event):
+        if event.is_directory:
+            return
+
+        name = os.path.basename(event.dest_path)
+        requests.post(
+            'http://%s/move_file' % self.host,
+            data={
+                'name': name,
+                'path': event.src_path,
+                'dest_path': event.dest_path
+            }
+        )
+        print 'File was moved from [%s] to [%s], sync to server [%s]' % (
+            event.src_path, event.dest_path, handler.host
         )
 
 

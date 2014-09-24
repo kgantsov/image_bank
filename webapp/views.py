@@ -214,6 +214,29 @@ def remove_file(request):
 
 
 @csrf_exempt
+def move_file(request):
+    """
+    Move or rename file
+    :param request:
+    :return:
+    """
+    name = request.POST.get('name')
+    path = request.POST.get('path')
+    dest_path = request.POST.get('dest_path')
+
+    file_obj = get_object_or_404(File, path=path)
+
+    file_obj.name = name
+    file_obj.path = dest_path
+    file_obj.save()
+
+    return HttpResponse(
+        json.dumps({'status': 'success'}),
+        content_type="application/json"
+    )
+
+
+@csrf_exempt
 def add_file(request):
     """
     Add new file to database

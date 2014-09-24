@@ -1,11 +1,9 @@
 import os
-import sys
 import time
 import mimetypes
 import requests
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
-
 
 
 class ChangeHandler(FileSystemEventHandler):
@@ -17,24 +15,19 @@ class ChangeHandler(FileSystemEventHandler):
     host = '127.0.0.1:8000'
 
     def on_created(self, event):
-        files = []
         if event.is_directory:
             return
 
         name = os.path.basename(event.src_path)
         mime_type = mimetypes.guess_type(event.src_path)[0]
 
-        if mime_type and mime_type.startswith('image'):
-            files = [(name, (name, open(event.src_path, 'rb'), mime_type))]
-
         requests.post(
             'http://%s/add_file' % self.host,
             data={
                 'name': name,
-                'path': os.path.abspath(event.src_path),
+                'path': event.src_path,
                 'mime_type': mime_type
-            },
-            files=files
+            }
         )
         print 'File [%s] created, sync to server [%s]' % (
             event.src_path, handler.host
@@ -43,35 +36,9 @@ class ChangeHandler(FileSystemEventHandler):
     def on_deleted(self, event):
         requests.post(
             'http://%s/remove_file' % self.host,
-            data={
-                'path': os.path.abspath(event.src_path),
-            }
+            data={'path': event.src_path}
         )
         print 'File [%s] deleted, sync to server [%s]' % (
-            event.src_path, handler.host
-        )
-
-    def on_modified(self, event):
-        files = []
-        if event.is_directory:
-            return
-
-        name = os.path.basename(event.src_path)
-        mime_type = mimetypes.guess_type(event.src_path)[0]
-
-        if mime_type and mime_type.startswith('image'):
-            files = [(name, (name, open(event.src_path, 'rb'), mime_type))]
-
-        requests.post(
-            'http://%s/add_file' % self.host,
-            data={
-                'name': name,
-                'path': os.path.abspath(event.src_path),
-                'mime_type': mime_type
-            },
-            files=files
-        )
-        print 'File [%s] modified, sync to server [%s]' % (
             event.src_path, handler.host
         )
 

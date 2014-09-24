@@ -205,7 +205,6 @@ def remove_file(request):
     else:
         file_obj = get_object_or_404(File, path=path)
 
-    file_obj.image.delete()
     file_obj.delete()
 
     return HttpResponse(
@@ -229,11 +228,8 @@ def add_file(request):
         name=name, path=path, mime_type=mime_type
     )
 
-    if request.FILES:
-        file_name = request.FILES.values()[0]
-        if len(file_name.read()) > 0:
-            file_obj.image.delete()
-            file_obj.image.save(name, file_name)
+    if file_obj.is_image():
+        file_obj.image = path
 
     file_obj.save()
 

@@ -100,6 +100,7 @@ def get_file(request, file_id):
         return {
             'id': meta_obj.id,
             'name': meta_obj.field.name,
+            'field_id': meta_obj.field_id,
             'description': meta_obj.field.description,
             'value': meta_obj.value,
         }
@@ -134,6 +135,7 @@ def add_meta_data(request):
     :param request:
     :return:
     """
+    meta_data_id = request.POST.get('meta_data_id', None)
     file_id = int(request.POST.get('file_id'))
     field_id = int(request.POST.get('field_id'))
     value = request.POST.get('value')
@@ -141,13 +143,16 @@ def add_meta_data(request):
     file_obj = get_object_or_404(File, id=file_id)
     field = get_object_or_404(Field, id=field_id)
 
-    meta_data, created = MetaData.objects.get_or_create(
-        file=file_obj, field=field
-    )
+    if meta_data_id:
+        meta_data = get_object_or_404(MetaData, id=meta_data_id)
+        meta_data.field = field
+    else:
+        meta_data, created = MetaData.objects.get_or_create(
+            file=file_obj, field=field
+        )
 
-    if created:
-        meta_data.value = value
-        meta_data.save()
+    meta_data.value = value
+    meta_data.save()
 
     return HttpResponse(
         json.dumps({'status': 'success'}),

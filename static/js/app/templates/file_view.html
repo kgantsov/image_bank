@@ -49,6 +49,15 @@
                 </td>
                 <td><%= meta_data.value %></td>
                 <td>
+                    <a
+                        href=""
+                        class="show_edit_meta_data_popup"
+                        data-meta_data_id="<%= meta_data.id %>"
+                        data-field_id="<%= meta_data.field_id %>"
+                        data-value="<%= meta_data.value %>"
+                    >
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
                     <a href="" class="remove_meta_data" data-id="<%= meta_data.id %>">
                         <span class="glyphicon glyphicon-remove"></span>
                     </a>
@@ -57,39 +66,7 @@
         <% }); %>
     </table>
     <% } %>
-    <button data-toggle="modal" data-target="#meta_data_popup" type="button" class="btn btn-success">Add meta data</button>
+    <button id="show_add_meta_data_popup" type="button" class="btn btn-success">Add meta data</button>
 
-    <div class="modal fade" id="meta_data_popup">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">
-                        <span aria-hidden="true">&times;</span>
-                        <span class="sr-only">Close</span>
-                    </button>
-                    <h4 class="modal-title">Add Meta Data</h4>
-                </div>
-                <form role="form" class="add_meta_data">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="field_id">Meta Data Field</label>
-                        <select class="form-control" id="field_id">
-                            <% _.each(fields, function(field) { %>
-                                <option value="<%= field.id %>"><%= field.name %></option>
-                            <% }); %>
-                        </select>
-
-                    </div>
-                    <div class="form-group">
-                        <label for="value">Meta Data Value</label>
-                        <textarea class="form-control" rows="3" id="value" placeholder="Meta Data Value"></textarea>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button id="add_meta_data" type="submit" class="btn btn-primary">Add</button>
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
+    <div id="meta_data_popup_container"></div>
 </div>

@@ -1,5 +1,6 @@
 requirejs.config({
     baseUrl: '/static/js/',
+    urlArgs: 'bust=' + Date.now(),
     waitSeconds: 0,
     paths: {
         jquery:             'libs/jquery/dist/jquery.min',

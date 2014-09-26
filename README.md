@@ -23,3 +23,36 @@ Javascript librares:
 
 Installation:
 =============
+
+Step 1. Installing python libraries:
+
+    pip install -r requirements.txt
+
+Step 2. Installing javascript libraries:
+
+    bower install
+    
+Step 3. Migrating database:
+
+    python manage.py migrate
+    python manage.py loaddata webapp/fixtures/initial_data.json
+    
+
+Launching:
+==========
+
+Starting web server:
+--------------------
+
+    python manage.py runserver
+
+
+Watching directory:
+-------------------
+
+    cd media/
+    python ../watcher/watcher.py -d watchdir
+
+
+
+

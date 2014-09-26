@@ -10,6 +10,15 @@ define(['backbone'], function(Backbone) {
             date_created: null,
             date_modified: null,
             meta_data: []
+        },
+        initialize: function() {
+            this.bind("error", this.defaultErrorHandler);
+        },
+
+        defaultErrorHandler: function(model, error) {
+            if (error.status == 404) {
+                window.location = '#/error/404';
+            }
         }
     });
     return File

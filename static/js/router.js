@@ -9,7 +9,8 @@ define([
             "index/:page/": "index",
             "index/:page(/:search_term)": "index",
             "view(/)": "view",
-            "view(/:id)": "view"
+            "view(/:id)": "view",
+            '*splat': 'notFound'
         },
         index: function(page, search_term) {
             var listFilesView = new ListFilesView({
@@ -20,6 +21,9 @@ define([
         view: function(id) {
             var fileView = new FileView({id: id});
             $('#content').html(fileView.render().el);
+        },
+        notFound: function () {
+            $('#content').html('<h4>404: Page not found</h4>');
         }
     });
 

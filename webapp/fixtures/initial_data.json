@@ -1,1 +1,75 @@
-[{"fields": {"name": "Exposure Time", "description": ""}, "model": "webapp.field", "pk": 1}, {"fields": {"name": "FNumber", "description": ""}, "model": "webapp.field", "pk": 2}, {"fields": {"name": "Compression", "description": ""}, "model": "webapp.field", "pk": 3}, {"fields": {"name": "Date and Time", "description": ""}, "model": "webapp.field", "pk": 4}, {"fields": {"name": "Manufacturer", "description": ""}, "model": "webapp.field", "pk": 5}, {"fields": {"name": "Model", "description": ""}, "model": "webapp.field", "pk": 6}, {"fields": {"name": "Flash", "description": ""}, "model": "webapp.field", "pk": 7}, {"fields": {"name": "Focal Length", "description": ""}, "model": "webapp.field", "pk": 8}]
+[{
+        "fields": {
+            "name": "Exposure Time",
+            "description": ""
+        },
+        "model": "webapp.field",
+        "pk": 1
+    }, {
+        "fields": {
+            "name": "FNumber",
+            "description": ""
+        },
+        "model": "webapp.field",
+        "pk": 2
+    }, {
+        "fields": {
+            "name": "Compression",
+            "description": ""
+        },
+        "model": "webapp.field",
+        "pk": 3
+    }, {
+        "fields": {
+            "name": "Date and Time",
+            "description": ""
+        },
+        "model": "webapp.field",
+        "pk": 4
+    }, {
+        "fields": {
+            "name": "Manufacturer",
+            "description": ""
+        },
+        "model": "webapp.field",
+        "pk": 5
+    }, {
+        "fields": {
+            "name": "Model",
+            "description": ""
+        },
+        "model": "webapp.field",
+        "pk": 6
+    }, {
+        "fields": {
+            "name": "Flash",
+            "description": ""
+        },
+        "model": "webapp.field",
+        "pk": 7
+    }, {
+        "fields": {
+            "name": "Focal Length",
+            "description": ""
+        },
+        "model": "webapp.field",
+        "pk": 8
+    }, {
+        "fields": {
+            "username": "admin",
+            "first_name": "",
+            "last_name": "",
+            "is_active": true,
+            "is_superuser": true,
+            "is_staff": true,
+            "last_login": "2014-09-26T17:25:10.248Z",
+            "groups": [],
+            "user_permissions": [],
+            "password": "pbkdf2_sha256$12000$DwobRAfJKLU3$3cy546KPP6DQpbCW2oWPO8BiHbX8AIB418U34CdMx7s=",
+            "email": "admin@gmail.com",
+            "date_joined": "2014-09-26T17:24:55.160Z"
+        },
+        "model": "auth.user",
+        "pk": 2
+    }
+]

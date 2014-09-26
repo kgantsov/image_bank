@@ -5,10 +5,7 @@
 from fabric.api import local, lcd
 
 
-def install():
-    # Install all needed python libraries
-    local('pip install -r requirements.txt')
-
+def setup():
     # Install all needed javascript libraries
     local('bower install')
 
@@ -26,6 +23,5 @@ def server():
 def watch():
     local('mkdir -p media/watchdir')
     with lcd('media'):
-        local('pwd')
         local('python ../watcher/watcher.py -d watchdir')
 

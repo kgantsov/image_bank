@@ -3,3 +3,4 @@ requests==1.2.3
 watchdog==0.8.1
 sorl-thumbnail==11.12.1b
 Pillow==2.5.3
+fabric==1.10.0

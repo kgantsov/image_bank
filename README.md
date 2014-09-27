@@ -39,6 +39,8 @@ Javascript librares:
 
 Installation (manual mode):
 ===========================
+Bower and NodeJS must be installed
+
 
 Step 1. Installing python libraries:
 
@@ -93,7 +95,7 @@ If you use docker application will start at http://0.0.0.0:8000 and will monitor
 if you open http://0.0.0.0:8000 you will see main page with updated files by 10 files per page. You can move to different page using pagination at the bottom of the page.
 
 Web application has several view:
-  - / - main page. if you open http://0.0.0.0:8000 you will see main page with updated files by 10 files per page. You can move to different page using pagination at the bottom of the page.
+  - / - main page. if you open http://0.0.0.0:8000 you will see main page with updated files by 10 files per page. You can go to different page using pagination at the bottom of the page.
   - /#/view/<:file_id> - This page contains all info about file and all metadata which were attached to this file by web interface. Also on this page you can add new metadata to file or delete or edit attached metadata.
 
 Search form shows on main page. So you can search files by their names, paths and metadata fields.

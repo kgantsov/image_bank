@@ -16,11 +16,11 @@ def setup():
     local('python manage.py loaddata webapp/fixtures/initial_data.json')
 
 
-def server():
-    local('python manage.py runserver 0.0.0.0:8000')
+def server(server='0.0.0.0:8000'):
+    local('python manage.py runserver %s' % server)
 
 
-def watch(server='127.0.0.1:8000'):
+def watch(server='0.0.0.0:8000'):
     local('mkdir -p media/watchdir')
     with lcd('media'):
         local('python ../watcher/watcher.py -d watchdir -s %s' % server)

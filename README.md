@@ -88,6 +88,10 @@ Watching directory:
 
 Usage:
 ======
+
+Web application:
+----------------
+
 If you use 'fab server'and 'fab watch' application will start at http://0.0.0.0:8000 and will monitor changing of files in media/watchdir.
 
 If you use docker application will start at http://0.0.0.0:8000 and will monitor changing of files in directory which you chose '-v /folder/to/watch'. This directory will mount to project dir '/code/media/watchdir'
@@ -101,4 +105,10 @@ Web application has several view:
 Search form shows on main page. So you can search files by their names, paths and metadata fields.
 
 If you want to add some new metadata fields which can be attached to all your files you need to go in admin interface /admin/webapp/field/. Also at this page you can edit or delete any of metadata fileds. For accessing to admin interface you should use 'admin' as login and password.
+
+
+Watcher application:
+--------------------
+
+Application will have watched folder after you start this application. So when you add some new files to watching folder application wiil send info about these files to the server and server will save them. If you remove file from watching folder it will be automaticaly removed from the database. Of course you can rename or move file to subdirectory and watcher will send info about it to the server.
 

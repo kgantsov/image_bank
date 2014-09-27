@@ -1,7 +1,7 @@
 Image bank
 ==========
 
-Assignment was to build minimalistic 'image bank' application with with limited search capabilities including background processing.
+Assignment was to build minimalistic 'image bank' application with limited search capabilities including background processing.
 
 What was done:
 

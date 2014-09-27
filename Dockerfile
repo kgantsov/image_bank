@@ -24,4 +24,4 @@ RUN bower install --allow-root
 RUN python manage.py migrate
 RUN python manage.py loaddata webapp/fixtures/initial_data.json
 
-CMD python manage.py runserver 0.0.0.0:8000
+CMD fab server

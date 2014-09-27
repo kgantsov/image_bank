@@ -1,7 +1,7 @@
 Image bank
 ==========
 
-Assignment was to build minimalistic 'image bank' application with with limited search capabilities including background processing.
+Assignment was to build minimalistic 'image bank' application with limited search capabilities including background processing.
 
 What was done:
 
@@ -92,9 +92,9 @@ Usage:
 Web application:
 ----------------
 
-If you use 'fab server'and 'fab watch' application will start at http://0.0.0.0:8000 and will monitor changing of files in media/watchdir.
+If you use 'fab server'and 'fab watch' - application will start at http://0.0.0.0:8000 and will monitor changing of files in media/watchdir.
 
-If you use docker application will start at http://0.0.0.0:8000 and will monitor changing of files in directory which you chose '-v /folder/to/watch'. This directory will mount to project dir '/code/media/watchdir'
+If you use docker - application will start at http://0.0.0.0:8000 and will monitor changing of files in directory which you chose '-v /folder/to/watch'. This directory will mount to project dir '/code/media/watchdir'
 
 if you open http://0.0.0.0:8000 you will see main page with updated files by 10 files per page. You can move to different page using pagination at the bottom of the page.
 
@@ -104,7 +104,7 @@ Web application has several view:
 
 Search form shows on main page. So you can search files by their names, paths and metadata fields.
 
-If you want to add some new metadata fields which can be attached to all your files you need to go in admin interface /admin/webapp/field/. Also at this page you can edit or delete any of metadata fileds. For accessing to admin interface you should use 'admin' as login and password.
+If you want to add some new metadata fields which can be attached to all your files, you need to go to the admin interface /admin/webapp/field/. Also at this page you can edit or delete any of metadata fileds. For accessing to admin interface you should use 'admin' as login and password.
 
 
 Watcher application:

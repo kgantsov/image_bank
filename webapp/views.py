@@ -1,9 +1,10 @@
 import json
+
+from django.core.paginator import Paginator
+from django.db.models import Q
 from django.shortcuts import HttpResponse
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
-from django.core.paginator import Paginator
-from django.db.models import Q
 from django.views.decorators.csrf import csrf_exempt
 
 from sorl.thumbnail import get_thumbnail

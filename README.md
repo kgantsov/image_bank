@@ -33,8 +33,8 @@ Step 2. Setup. It will setup all needed javascript libraries, migrate database, 
     fab setup
 
 
-Launching:
-==========
+Launching (manual mode):
+========================
 
 Starting web server:
 --------------------
@@ -46,6 +46,26 @@ Watching directory:
 -------------------
 
     fab watch
+
+
+Launching (via Docker):
+========================
+
+Build docker image:
+--------------------
+
+    docker build -t image_bank .
+
+Starting web server:
+--------------------
+
+    docker run -i -p 8000:8000 --name server -v /folder/to/watch:/code/media/watchdir -t image_bank
+
+
+Watching directory:
+-------------------
+
+    docker run -i --name watcher -v /folder/to/watch:/code/media/watchdir -t image_bank fab watch:0.0.0.0:8000
 
 
 

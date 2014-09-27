@@ -17,7 +17,7 @@ define(['backbone'], function(Backbone) {
 
         defaultErrorHandler: function(model, error) {
             if (error.status == 404) {
-                window.location = '#/error/404';
+                window.app.navigate('#/error/404', {trigger:true});
             }
         }
     });

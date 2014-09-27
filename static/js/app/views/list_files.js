@@ -30,8 +30,12 @@ define([
             }));
             return this;
         },
-        search: function() {
-            window.location = '#/index/1/' + encodeURIComponent($('#term').val());
+        search: function(e) {
+            window.app.navigate(
+                '/index/1/' + encodeURIComponent($('#term').val()),
+                {trigger:true}
+            );
+            e.preventDefault();
         },
         removeFile: function (e) {
             var self = this;
